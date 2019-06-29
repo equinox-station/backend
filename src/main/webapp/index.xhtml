@@ -1,0 +1,162 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>Equinox Station of the Interstellar Guardian -
+			Gerenciar Tripulação</title>
+		<h:outputStylesheet library="css" name="style.css" />
+		<h:outputScript library="js" name="form.js" />
+		<h:outputScript name="webjars/jquery/3.4.1/jquery.min.js" />
+		<h:outputScript
+			name="webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
+		<h:outputStylesheet
+			name="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+	</h:head>
+	<h:body onload="clear()">
+		<!-- Barra superior de navegação -->
+		<nav
+			class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+			<span class="navbar-brand"> <img
+				src="https://img.icons8.com/material/24/FFFFFF/space-shuttle.png"
+				width="30" height="30" class="d-inline-block align-top rounded"
+				alt="" /> Equinox Station of the Interstellar Guardian
+			</span>
+			<button data-toggle="modal" data-target="#modifyModal"
+				onclick="startnew()" class="btn btn-secondary btn-circle">
+				<img src="https://img.icons8.com/material/24/FFFFFF/add.png" />
+				Add Crew
+			</button>
+		</nav>
+		<!-- Mensagem Inicial -->
+		<div
+			class="alert alert-warning alert-dismissible fade show w-50 mx-auto my-3"
+			role="alert">
+			<strong>Welcome!</strong> This is the Equinox Station of the
+			Interstellar Guardian tripulation database. Here you can access,
+			insert, update or delete records about our crew. Use with
+			responsability! Remember: the Goddess is watching!
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Fechar">
+				<span aria-hidden="true">x</span>
+			</button>
+		</div>
+		<!-- Cards de dados dos usuários -->
+		<p:outputPanel deferred="true" class="container center-child mt-3">
+			<h:dataTable value="#{userController.getAllUsers()}" var="user">
+				<h:column>
+					<div class="alert alert-secondary w-50">
+						<div class="dropright float-right">
+							<button class="btn btn-link alert-link dropdown-toggle"
+								type="button" id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"></button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="tel:#{user.telefone}"><img
+									src="https://img.icons8.com/material/24/007bff/phone.png" /><span
+									class="btn btn-link">Call</span> </a>
+								<div class="dropdown-item">
+									<img
+										src="https://img.icons8.com/material/24/007bff/update-left-rotation.png" />
+									<!--
+									-->
+									<button data-toggle="modal" data-target="#modifyModal"
+										onclick="copy(#{user.id})" class="btn btn-link">Update</button>
+								</div>
+								<div class="dropdown-item">
+									<h:form>
+										<img
+											src="https://img.icons8.com/material/24/007bff/delete-forever.png" />
+										<h:commandButton value="Delete"
+											action="#{userController.deleteUser(user.id)}"
+											class="btn btn-link">
+										</h:commandButton>
+									</h:form>
+								</div>
+							</div>
+						</div>
+						<div id="card" class="media">
+							<img class="align-self-center rounded-circle"
+								src="https://img.icons8.com/dusk/52/000000/user-male-circle.png"
+								alt="Foto de perfil" width="64" height="64" />
+							<div class="align-self-center media-body px-3">
+								<h5 class="mt-0">
+									<span class="font-weight-bold" id='nome#{user.id}'>#{user.nome}</span>
+									<span class="opacity-75">@<span id='login#{user.id}'>#{user.login}</span></span>
+								</h5>
+								<span id='cargo#{user.id}'>#{user.cargo}</span> <span
+									class="d-none" id='telefone#{user.id}'>#{user.telefone}</span>
+							</div>
+						</div>
+					</div>
+				</h:column>
+			</h:dataTable>
+		</p:outputPanel>
+		<!-- Formulário modal -->
+		<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog"
+			aria-labelledby="modifyModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modifyModalLabel">
+							<span id="tipoAcao">Insert/Update</span> Crew
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">x</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h:form id="modform">
+							<h:inputHidden id="id" binding="#{inserirId}" value="0" />
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">@</span>
+								</div>
+								<h:inputText binding="#{inserirLogin}" id="login" type="text"
+									class="form-control" placeholder="Login" aria-label="Login"
+									aria-describedby="basic-addon1" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Name</span>
+								</div>
+								<h:inputText binding="#{inserirNome}" id="nome" type="text"
+									class="form-control" placeholder="Nome" aria-label="Nome"
+									aria-describedby="basic-addon1" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Position</span>
+								</div>
+								<h:inputText binding="#{inserirCargo}" id="cargo" type="text"
+									class="form-control" placeholder="Cargo" aria-label="Cargo"
+									aria-describedby="basic-addon1" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Telephone</span>
+								</div>
+								<h:inputText binding="#{inserirTelefone}" id="telefone"
+									type="text" class="form-control" placeholder="Telefone"
+									aria-label="Telefone" aria-describedby="basic-addon1" />
+							</div>
+
+							<h:commandButton value="Salvar" class="btn btn-secondary w-100"
+								action="#{userController.modifyUser(inserirId.value, inserirLogin.value, inserirNome.value, inserirCargo.value, inserirTelefone.value)}">
+							</h:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-right">
+			<small>Copyright (c) 2019 Francisco Lêdson dos Santos</small>
+		</div>
+	</h:body>
+</f:view>
