@@ -7,7 +7,7 @@
 	<groupId>br.com.ledson</groupId>
 	<artifactId>desafio</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>desafio-backend</name>
 	<description>back-end do desafio</description>
@@ -122,6 +122,14 @@
 			<version>5.4.2</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
