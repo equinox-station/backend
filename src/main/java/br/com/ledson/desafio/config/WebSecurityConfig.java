@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
         		.and()
         	.sessionManagement()
-        		.maximumSessions(1);
+        		.maximumSessions(25);
     }
     
     @Autowired
