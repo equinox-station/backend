@@ -26,8 +26,8 @@
 			</span>
 			<button data-toggle="modal" data-target="#modifyModal"
 				onclick="startnew()" class="btn btn-secondary btn-circle">
-				<img src="https://img.icons8.com/material/24/FFFFFF/add.png" />
-				Add Crew
+				<img src="https://img.icons8.com/material/24/FFFFFF/add.png" /> Add
+				Crew
 			</button>
 		</nav>
 		<!-- Mensagem Inicial -->
@@ -39,7 +39,7 @@
 			insert, update or delete records about our crew. Use with
 			responsability! Remember: the Goddess is watching!
 			<button type="button" class="close" data-dismiss="alert"
-				aria-label="Fechar">
+				aria-label="Close">
 				<span aria-hidden="true">x</span>
 			</button>
 		</div>
@@ -116,7 +116,7 @@
 									<span class="input-group-text" id="basic-addon1">@</span>
 								</div>
 								<h:inputText binding="#{inserirLogin}" id="login" type="text"
-									class="form-control" placeholder="Login" aria-label="Login"
+									class="form-control" aria-label="Login"
 									aria-describedby="basic-addon1" />
 							</div>
 
@@ -125,7 +125,7 @@
 									<span class="input-group-text" id="basic-addon1">Name</span>
 								</div>
 								<h:inputText binding="#{inserirNome}" id="nome" type="text"
-									class="form-control" placeholder="Nome" aria-label="Nome"
+									class="form-control" aria-label="Name"
 									aria-describedby="basic-addon1" />
 							</div>
 
@@ -134,7 +134,7 @@
 									<span class="input-group-text" id="basic-addon1">Position</span>
 								</div>
 								<h:inputText binding="#{inserirCargo}" id="cargo" type="text"
-									class="form-control" placeholder="Cargo" aria-label="Cargo"
+									class="form-control" aria-label="Position"
 									aria-describedby="basic-addon1" />
 							</div>
 
@@ -143,11 +143,11 @@
 									<span class="input-group-text" id="basic-addon1">Telephone</span>
 								</div>
 								<h:inputText binding="#{inserirTelefone}" id="telefone"
-									type="text" class="form-control" placeholder="Telefone"
-									aria-label="Telefone" aria-describedby="basic-addon1" />
+									type="text" class="form-control" aria-label="Telephone"
+									aria-describedby="basic-addon1" />
 							</div>
 
-							<h:commandButton value="Salvar" class="btn btn-secondary w-100"
+							<h:commandButton value="OK" class="btn btn-secondary w-100"
 								action="#{userController.modifyUser(inserirId.value, inserirLogin.value, inserirNome.value, inserirCargo.value, inserirTelefone.value)}">
 							</h:commandButton>
 						</h:form>
